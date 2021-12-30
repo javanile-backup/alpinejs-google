@@ -19,6 +19,8 @@ limitations under the License.
   <head>
     <title>Google Tasks API Quickstart</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/zephyr/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </head>
   <body>
     <p>Google Tasks API Quickstart</p>
@@ -29,9 +31,42 @@ limitations under the License.
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
+    <div x-data="{ posts: [{title:'Hi1'},{title:'Hi2'}] }">
+      <template x-for="post in posts">
+        <h2 x-text="post.title"></h2>
+      </template>
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#welcome">
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="welcome" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <script type="text/javascript">
       // Client ID and API key from the Developer Console
       var CLIENT_ID = '1032540857056-qon780v6a8eekjni9o4mucpi4lgp86nm.apps.googleusercontent.com';
+      //var CLIENT_ID = '1032540857056-t35nvos577062grv0n2gkiq03uu350b7.apps.googleusercontent.com';
+
       var API_KEY = 'AIzaSyAF1NNi4ic3yAJs5DpcJWkb9lZuUr2yU04';
 
       // Array of API discovery doc URLs for APIs used by the quickstart
@@ -39,7 +74,7 @@ limitations under the License.
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/tasks.readonly";
+      var SCOPES = "https://www.googleapis.com/auth/tasks https://www.googleapis.com/auth/tasks.readonly";
 
       var authorizeButton = document.getElementById('authorize_button');
       var signoutButton = document.getElementById('signout_button');
@@ -86,6 +121,8 @@ limitations under the License.
         } else {
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
+          let myModal = new bootstrap.Modal(document.getElementById('welcome'), {});
+          myModal.show();
         }
       }
 
@@ -136,6 +173,7 @@ limitations under the License.
       }
     </script>
 
+    <script defer src="//unpkg.com/alpinejs"></script>
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
